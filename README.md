@@ -67,21 +67,22 @@ In order for your project to be considered `DONE` (passing grade), you should ha
 
 ### Backend
 
-1. Server endpoints are RESTful.
+<!-- 1. Server endpoints are RESTful. -->
+
 2. There are endpoints for the following actions:
-   - retrieve all flight numbers
-   - retrieve single flight data (seating)
-   - retrieve all reservations
-   - retrieve a single reservation
-   - create a reservation
-   - delete a reservation _This is a requirement, even though the FE of this is a stretch goal._
-   - update a reservation _This is a requirement, even though the FE of this is a stretch goal._
+   <!-- - retrieve all flight numbers -->
+   <!-- - retrieve single flight data (seating) -->
+   <!-- - retrieve all reservations -->
+   <!-- - retrieve a single reservation -->
+   <!-- - create a reservation -->
+   <!-- - delete a reservation _This is a requirement, even though the FE of this is a stretch goal._ -->
+   <!-- - update a reservation _This is a requirement, even though the FE of this is a stretch goal._ -->
 3. server should respond in a _complete_ fashion.
-   - Send the status and the json separately.
-   - send the status in the json object as well.
-   - when a request succeeds respond with requested `data`.
-   - when a request fails, respond with the `data` that was sent to the server. _This makes it easier for FE developers to debug their code._
-   - when a request does not need any data to be returned, provide a message explaining the status: i.e. "reservation deleted."
+   <!-- - Send the status and the json separately. -->
+   <!-- - send the status in the json object as well. -->
+   <!-- - when a request succeeds respond with requested `data`. -->
+   <!-- - when a request fails, respond with the `data` that was sent to the server. _This makes it easier for FE developers to debug their code._ -->
+   <!-- - when a request does not need any data to be returned, provide a message explaining the status: i.e. "reservation deleted." -->
 
 ```js
 res.status(200).json({ status: 200, data: {}, message: {} });
@@ -89,10 +90,13 @@ res.status(200).json({ status: 200, data: {}, message: {} });
 
 ### Frontend
 
-1. user can select a flight from a dropdown. _Current implementation of an input field is not ideal._
-2. user can select an available seat.
-3. user can enter their personal information.
-4. user can view the flight confirmation page.
+<!-- 1. user can select a flight from a dropdown. _Current implementation of an input field is not ideal._ -->
+
+<!-- 2. user can select an available seat. -->
+
+<!-- 3. user can enter their personal information. -->
+<!-- 4. user can view the flight confirmation page. -->
+
 5. given a reservation `id`, user should be able to view her reservation.
 
 _Note that mutated test data will be preserved as long as your server is running. It stays in memory. The changes will only be reset when the server is restarted._

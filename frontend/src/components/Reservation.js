@@ -1,0 +1,176 @@
+import React from "react";
+import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { themeVars } from "./GlobalStyles";
+import tombstone from "../assets/tombstone.png";
+
+const Reservation = ({ userReservation, setUserReservation }) => {
+  const [reservationId, setReservationId] = useState("");
+
+  const [error, setError] = useState(false);
+  const { id, flight, givenName, seat, surname, email } = userReservation;
+  console.log(userReservation);
+  return (
+    <>
+      <Form
+        onSubmit={(ev) => {
+          ev.preventDefault();
+          fetch(`/reservations/${reservationId}`)
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.status === 200) {
+                setError(false);
+                setUserReservation(data.data);
+              } else {
+                setError(true);
+              }
+            });
+        }}
+      >
+        <Label>Please enter your reservation ID</Label>
+        <UserDiv>
+          <Input
+            type="text"
+            name="reservationId"
+            value={reservationId}
+            onChange={(ev) => {
+              setReservationId(ev.target.value);
+            }}
+          />
+          <Check type="submit" value="Search" />
+        </UserDiv>
+      </Form>
+
+      {error ? (
+        <Wrapper>Sorry, this reservation ID is not in our system.</Wrapper>
+      ) : (
+        <DivDiv>
+          <Card>
+            <Flight>
+              <Span>Flight informations:</Span>
+              <FNumber>
+                <Bold>Flight number:</Bold> {flight}
+              </FNumber>
+              <FNumber>
+                <Bold>Seat number:</Bold> {seat}
+              </FNumber>
+            </Flight>
+            <User>
+              <SpanLast>User informations:</SpanLast>
+              <FNumber>
+                <Bold>ID:</Bold> {id}
+              </FNumber>
+              <FNumber>
+                <Bold>Name:</Bold> {givenName}
+              </FNumber>
+              <FNumber>
+                <Bold>Family Name:</Bold> {surname}
+              </FNumber>
+              <FNumber>
+                <Bold>Email:</Bold> {email}
+              </FNumber>
+            </User>
+          </Card>
+        </DivDiv>
+      )}
+    </>
+  );
+};
+
+const UserDiv = styled.div`
+  display: flex;
+`;
+
+const Check = styled.input`
+  background-color: #aa001e;
+  font-family: "Permanent Marker", cursive;
+  color: #f79d00;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Input = styled.input`
+  width: 420px;
+`;
+
+const Label = styled.label`
+  margin-top: 50px;
+  margin-bottom: 10px;
+`;
+
+const SpanLast = styled.span`
+  font-family: "Permanent Marker", cursive;
+  font-size: 30px;
+  color: white;
+  padding-bottom: 10px;
+  padding-top: 30px;
+`;
+
+const Span = styled.span`
+  font-family: "Permanent Marker", cursive;
+  font-size: 30px;
+  color: white;
+  padding-bottom: 10px;
+`;
+
+const Bold = styled.span`
+  padding: 10px 10px 10px 0;
+  font-family: "sans-serif";
+  font-weight: bolder;
+  color: black;
+`;
+
+const FNumber = styled.div`
+  display: flex;
+  align-items: baseline;
+`;
+
+const DivDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  color: #aa001e;
+  font-family: "Permanent Marker", cursive;
+  font-size: 30px;
+  text-align: center;
+`;
+
+const Card = styled.div`
+  width: 400px;
+  height: 400px;
+  border: 8px solid #aa001e;
+  border-radius: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+`;
+const Flight = styled.div`
+  font-family: "sans-serif";
+  display: flex;
+  flex-direction: column;
+  color: white;
+`;
+
+const User = styled.div`
+  font-family: "sans-serif";
+  display: flex;
+  flex-direction: column;
+`;
+
+export default Reservation;
